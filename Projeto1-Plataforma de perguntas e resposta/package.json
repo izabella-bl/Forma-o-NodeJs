@@ -1,0 +1,23 @@
+{
+  "name": "projeto1-plataforma-de-perguntas-e-resposta",
+  "version": "1.0.0",
+  "description": "Uma plataforma de perguntas e respostas ao estilo Yahoo respostas",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/izabella-bl/Formacao_NodeJs.git"
+  },
+  "author": "Izabella B.Lopes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/izabella-bl/Formacao_NodeJs/issues"
+  },
+  "homepage": "https://github.com/izabella-bl/Formacao_NodeJs#readme",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.2"
+  }
+}
