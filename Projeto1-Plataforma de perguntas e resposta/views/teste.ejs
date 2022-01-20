@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ask Everyone</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <h1>Olá,Seja Bem Vindo(a)!</h1>
+
+    <p>Nome:<%=nome%></p> <!--"=" Somente para exibir variaveis -->
+    <p>Idade:<%=idade%></p> 
+    <p>Ativa dês:<%=ativa%></p>
+
+    <%pessoas.forEach(function(pessoa) { %> 
+        <hr>
+       <%=pessoa.nome %><br>
+       <%=pessoa.idade %>  
+    <% }) %>
+
+
+    <% if(msg == true){ %>
+        <h3>Isso é uma msg de erro!</h3>
+    <%} else{%>
+        <h3>Nenhum erro!</h3>
+    <%}%>
+</body>
+</html>
