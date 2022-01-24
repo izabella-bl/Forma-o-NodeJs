@@ -10,3 +10,7 @@ img{
 #titulo{
     color: 	#1E90FF;
 }
+
+#formulario-pergunta{
+    margin-top: 5vh;   /* 5vh = 5% */
+}
