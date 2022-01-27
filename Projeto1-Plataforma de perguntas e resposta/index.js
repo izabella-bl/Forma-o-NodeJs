@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
 app.get("/",(req,res)=>{ 
-    perguntaModel.findAll().then(perguntas => {
+    perguntaModel.findAll({order:[['id','DESC']]}).then(perguntas => {
         res.render("index",{
             perguntas:perguntas
         });
@@ -43,6 +43,21 @@ app.post("/salvarpergunta",(req,res)=>{
    }).then(() =>{
        res.redirect("/");
    });
+});
+
+app.get("/pergunta/:id",(req,res) => {
+    var id = req.params.id;
+    perguntaModel.findOne({
+        where:{id:id}
+    }).then(pergunta=>{
+        if(pergunta != undefined){  //Pergunta encontrada
+            res.render('pergunta',{
+                pergunta:pergunta
+            })
+        }else{
+            res.redirect('/')
+        }
+    })
 });
 
 app.listen(8081,()=>{
