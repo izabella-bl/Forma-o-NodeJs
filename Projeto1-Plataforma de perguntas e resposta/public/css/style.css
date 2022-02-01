@@ -15,7 +15,15 @@ img{
     margin-top: 5vh;   /* 5vh = 5% */
 }
 
-h1{
+.container  h1{
     color: white;
 }
 
+#pergunta,#resposta{
+    margin-top: 5vh;
+}
+
+h6{
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
