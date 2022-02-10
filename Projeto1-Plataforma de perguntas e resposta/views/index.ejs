@@ -12,15 +12,15 @@
             <div class="card">
                 <div class="card-body">
                     <h3><%= pergunta.titulo %></h3>
-                    <h6><%= pergunta.descricao %></h6>
+                    <h6 > <%=(pergunta.qtdResposta == null ? 0 : pergunta.qtdResposta);%> respostas </h6>
                  </div>
-                 <div class="card-footer">
-                     <a href="/pergunta/<%= pergunta.id %> " class="btn btn-primary">Responder</a>
+                 <div class="card-footer" >
+                     <a href="/pergunta/<%=pergunta.id%> " class="btn btn-primary">Responder</a>
                  </div>
             </div>
             
         <% });%>
 
     </div>
-</body>
+</body
 <%-include('partials/footer.ejs')%>

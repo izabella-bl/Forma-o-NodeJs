@@ -9,6 +9,10 @@ const Pergunta = connection.define('pergunta',{
     descricao:{
         type:Sequelize.TEXT,
         allowNull:false
+    },
+    qtdResposta:{
+        type:Sequelize.INTEGER,
+        allowNull:true
     }
 });
 

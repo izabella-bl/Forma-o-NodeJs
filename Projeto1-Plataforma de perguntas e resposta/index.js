@@ -22,12 +22,16 @@ app.use(bodyParser.json());
 
 app.get("/",(req,res)=>{ 
     perguntaModel.findAll({order:[['id','DESC']]}).then(perguntas => {
-        res.render("index",{
-            perguntas:perguntas
-        });
+            res.render("index",{
+                perguntas:perguntas
+            });
+        
+        
     });
    
 });
+
+
 
 app.get("/perguntar",(req,res)=>{
    res.render("perguntar");
@@ -54,16 +58,24 @@ app.get("/pergunta/:id",(req,res) => {
     }).then(pergunta=>{
         if(pergunta != undefined){  //Pergunta encontrada
             
-           Resposta.findAll({
+           Resposta.findAndCountAll({
                 where: {perguntaId: pergunta.id},
                 order:[
                     ['id','DESC']
                 ]
-            }).then(respostas => {
-                res.render('pergunta',{
-                    pergunta:pergunta,
-                    respostas:respostas
-                });
+            }).then(respostas => { 
+                pergunta.qtdResposta = respostas.count;
+                pergunta.save();
+                /*perguntaModel.create({
+                    //qtdResposta:respostas.count
+                   
+                }).then(()=>{*/
+                    res.render('pergunta',{
+                        pergunta:pergunta,
+                        respostas:respostas.rows,
+        
+                    });
+                    
             });
         }else{
             res.redirect('/')
