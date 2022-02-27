@@ -5,14 +5,15 @@
         <br>
         <div class="card ">
             <div class="card-header">
-              Cadastrar
+              <h5>Cadastrar Categoria</h5>
             </div>
             <div class="card-body">
-              <h5 class="card-title">Cadastrar Categoria</h5>
-              <div class="input-group mb-3">
-                <input type="text" class="form-control"  aria-label="Recipient's username" aria-describedby="button-addon2">
-                <button class="btn btn-success" type="button" id="button-addon2">Cadastrar</button>
-              </div>
+              <form method="post" action="/categorias/save">
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" name="title" aria-label="Recipient's username" aria-describedby="button-addon2" placeholder="Define o título da Categoria">
+                  <button class="btn btn-success" type="submit" id="button-addon2">Cadastrar</button>
+                </div>
+              </form>
             </div>
     </div>
     

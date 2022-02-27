@@ -2,7 +2,25 @@
 
 <body>
     <%-include('partials/navbar.ejs')%> 
-    <h1>teste</h1>
+    <div class="container">
+        <br>
+        <% artigos.forEach(artigo => { %> 
+                
+            <div class="card">
+                <div class="card-header">
+                    <h2><%=artigo.title %> </h2>
+                </div>
+                <div class="card-body">
+                    <a href="/<%=artigo.slug%> " class="btn btn-success">Ler artigo</a>
+                </div>
+                    
+            </div>
+          <br>
+
+        <% }) %> 
+        
+    </div>
+    
 </body>
 
 <%-include ('partials/footer.ejs')%> 
