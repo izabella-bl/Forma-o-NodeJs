@@ -4,7 +4,9 @@ const Categoria = require("./Categoria");
 const slugify = require("slugify");
 
 router.get("/admin/categorias/new",(req,res) =>{
-       res.render("admin/Categorias/new")
+      Categoria.findAll().then(categorias =>{
+            res.render("admin/Categorias/new",{categorias})
+      });
 });
 
 router.post("/categorias/save",(req,res) => {
@@ -54,7 +56,10 @@ router.get("/admin/categorias/edit/:id",(req,res) =>{
       
       Categoria.findByPk(id).then(categoria => {
             if(categoria != undefined){
-               res.render("admin/Categorias/edit",{categoria:categoria});
+                  Categoria.findAll().then(categorias =>{
+                        res.render("admin/Categorias/edit",{categorias:categorias,categoria:categoria});
+                  })
+              
             }else{
                   res.redirect("/admin/categorias");
             }
@@ -64,7 +69,7 @@ router.get("/admin/categorias/edit/:id",(req,res) =>{
         
 });
 
-router.post("/catgorias/update",(req,res)=>{
+router.post("/categorias/update",(req,res)=>{
       var id = req.body.id;
       var title = req.body.title;
 
@@ -76,5 +81,7 @@ router.post("/catgorias/update",(req,res)=>{
             res.redirect("/admin/categorias");
       });
 });
+
+router.get("/artigos");
 
 module.exports = router;

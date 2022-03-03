@@ -1,0 +1,54 @@
+<%-include('../../partials/header.ejs')%> 
+<body>
+    <%-include('../../partials/navbar.ejs')%> 
+    <div class="container">
+        <br>
+        <div class="card ">
+            <div class="card-header">
+               <h5>Editar artigo</h5>
+            </div>
+            <div class="card-body">
+              <form method="post" action="/artigos/update">
+                <div class="mb-3">
+                  <input type="hidden" name="id" value="<%=artigo.id%>">
+                  <input type="text" class="form-control" name="title" value="<%=artigo.title%>" aria-label="Recipient's username" placeholder="Define o título do artigo"> <br>
+                  <textarea  class="form-control" placeholder="Escreva o artigo aqui..." name="body" id="artigo" cols="30" rows="10" ></textarea><br>
+                  <label>Categoria</label>
+                  <select name="categoria" class="form-control">
+                       <% categorias.forEach((categoria)=>{ %>
+                           <% if(categoria.id === artigo.categoriumId ){ %> 
+                              <option value="<%=categoria.id %>" selected><%=categoria.title%></option>
+                            <%}else{ %>
+                              <option value="<%=categoria.id %>"><%=categoria.title%></option>
+                            <% } %> 
+      
+                        <% }) %> 
+                  </select> <br>
+                  <button class="btn btn-success" type="submit" id="button-addon2">Atualizar</button>
+                </div>
+              </form>
+            </div>
+    </div>
+    
+</body>
+
+<div id="content" style="display: none;">
+  <%-artigo.body %>
+</div>
+
+<%-include ('../../partials/footer.ejs')%> 
+<script src="/tinymce/tinymce.min.js"></script>
+
+<script>
+
+    tinymce.init({
+        language: "pt_BR",
+        selector: "#artigo",
+        plugins:[
+            'advlist autolink link imagem lists print preview hr searchreplace wordcount fullscreen insertdatetime media save table paste emoticons'
+        ],
+        init_instance_callback: () =>{
+          tinymce.get("artigo").setContent($("#content").html())
+        }
+    });
+</script>
