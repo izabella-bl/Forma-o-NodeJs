@@ -3,10 +3,12 @@ const router = express.Router();
 const Categoria = require("../Categoria/Categoria");
 const Artigo = require("./Artigo");
 const slugify = require("slugify");
+const adminAuth = require("../middlewares/adminAuth");
+
 
 router.use(express.static('public'));
 
-router.get("/admin/artigo",(req,res) => {
+router.get("/admin/artigo", adminAuth,(req,res) => {
       Artigo.findAll({
             include: [{model:Categoria}]
       }).then(artigos => {
@@ -59,7 +61,7 @@ router.post("/artigos/delete",(req,res) =>{
       }
 });
 
-router.get("/admin/artigos/edit/:id", (req,res)=>{
+router.get("/admin/artigos/edit/:id",adminAuth,(req,res)=>{
       var id = req.params.id;
         
       Artigo.findByPk(id).then(artigo => {

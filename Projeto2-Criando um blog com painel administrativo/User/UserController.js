@@ -2,14 +2,13 @@ const express = require("express");
 const router = express.Router();
 const User = require("./User");
 const Categoria = require("../Categoria/Categoria")
-const bcrypt = require("bcrypt")
+const bcrypt = require("bcrypt");
+const adminAuth = require("../middlewares/adminAuth");
 
- router.get("/admin/users",(req,res) =>{
+ router.get("/admin/users",adminAuth,(req,res) =>{
      User.findAll().then(users =>{
-         Categoria.findAll().then(categorias =>{
-            res.render("admin/Users/index",{users:users,categorias:categorias})
-         });
-            
+        res.render("admin/Users/index",{users:users})
+
      });
  });
 
@@ -25,7 +24,7 @@ const bcrypt = require("bcrypt")
      var email = req.body.email;
      var password = req.body.password;
 
-     User.findOnde({where:{emaila:email}}).then(user =>{
+     User.findOne({where:{email:email}}).then(user =>{
          if(user == undefined){
             var salt = bcrypt.genSaltSync(10);
             var hash = bcrypt.hashSync(password,salt);
@@ -34,15 +33,51 @@ const bcrypt = require("bcrypt")
                 email:email,
                 password:hash
             }).then(() =>{
-                res.redirect("/admin/users")
+                res.redirect("/")
             }).catch(erro => {
-                res.redirect("/admin/users");
+                res.redirect("/");
             });
          }else{
-            res.redirect("/admin/users");
+            res.redirect("/");
          }
      });
 
+});
+
+router.get("/login",(req,res) =>{
+  Categoria.findAll().then(categorias =>{
+    res.render("admin/Users/login",{categorias:categorias});
+  });
+});
+
+router.post("/authenticate",(req,res) =>{
+    var email = req.body.email;
+    var password = req.body.password;
+
+    User.findOne({where:{email:email}}).then(user =>{
+        if( user != undefined){
+
+            var correct = bcrypt.compareSync(password,user.password);
+            console.log("cheguei na comparaçao")
+            if(correct){
+                console.log("cheguei aqui oh")
+                req.session.user = {
+                    id:user.id,
+                    email:user.email
+                }
+                res.redirect("/admin/artigo");
+            }else{
+                res.redirect("/");
+            }
+        }else{
+            res.redirect("/");
+        }
+    });
+});
+
+router.get("/logout" , (req,res) =>{
+    req.session.user = undefined;
+    res.redirect("/");
 });
 
 

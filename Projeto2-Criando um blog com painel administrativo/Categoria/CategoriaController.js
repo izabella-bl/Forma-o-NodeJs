@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Categoria = require("./Categoria");
 const slugify = require("slugify");
+const adminAuth = require("../middlewares/adminAuth");
 
 router.get("/admin/categorias/new",(req,res) =>{
       Categoria.findAll().then(categorias =>{
@@ -24,7 +25,7 @@ router.post("/categorias/save",(req,res) => {
       
 });
 
-router.get("/admin/categorias",(req,res) =>{
+router.get("/admin/categorias",adminAuth,(req,res) =>{
       Categoria.findAll().then( categorias =>{
             res.render("admin/Categorias/index",{categorias:categorias})
       });
@@ -51,7 +52,7 @@ router.post("/categorias/delete",(req,res) =>{
       }
 });
 
-router.get("/admin/categorias/edit/:id",(req,res) =>{
+router.get("/admin/categorias/edit/:id",adminAuth,(req,res) =>{
       var id = req.params.id;
       
       Categoria.findByPk(id).then(categoria => {

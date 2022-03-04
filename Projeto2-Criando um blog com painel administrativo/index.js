@@ -12,9 +12,11 @@ const Artigo = require("./Artigo/Artigo");
 const Categoria = require("./Categoria/Categoria");
 
 
-
-
 app.set('view engine','ejs');
+
+app.use(session ({
+    secret:"secreto",cookie:{maxAge:30000000}
+}));
 
 app.use(express.static('public'));
 

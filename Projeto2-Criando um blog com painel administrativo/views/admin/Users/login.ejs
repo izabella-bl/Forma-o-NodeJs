@@ -1,14 +1,14 @@
 <%-include('../../partials/header.ejs')%> 
 
 <body>
-  <%-include('../../partials/navbarAdmin.ejs')%> 
+  <%-include('../../partials/navbar.ejs')%> 
      <div class="container">
          <div class="card mt-4">
              <div class="card-header">
-                 <h2>Crição de usuáro</h2>
+                 <h2>Login de Admin</h2>
              </div>
              <div class="card-body">
-                <form method="post" action="/users/create">
+                <form method="post" action="/authenticate">
                     <div class="mb-3">
                       <label for="exampleInputEmail1" class="form-label">Email</label>
                       <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
@@ -17,7 +17,7 @@
                       <label for="exampleInputPassword1" class="form-label">Senha</label>
                       <input type="password" name="password" class="form-control" id="exampleInputPassword1">
                     </div>
-                    <button type="submit" class="btn btn-primary">Enviar</button>
+                    <button type="submit" class="btn btn-primary">Login</button>
                   </form>
              </div>
          </div>
