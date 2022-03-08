@@ -57,10 +57,8 @@ router.post("/authenticate",(req,res) =>{
     User.findOne({where:{email:email}}).then(user =>{
         if( user != undefined){
 
-            var correct = bcrypt.compareSync(password,user.password);
-            console.log("cheguei na comparaçao")
+            var correct = bcrypt.compareSync(password,user.password)
             if(correct){
-                console.log("cheguei aqui oh")
                 req.session.user = {
                     id:user.id,
                     email:user.email
